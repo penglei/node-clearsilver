@@ -1,0 +1,3 @@
+<?cs var:a.b?>
+<?cs var:a.c?>
+<?cs var:c.d?>

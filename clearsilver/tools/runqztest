@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd $(pwd)/tools
+
+../out/Debug/cs -h t.hdf -c t.cs

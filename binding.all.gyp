@@ -1,0 +1,82 @@
+{
+  "targets": [
+	{
+		    "target_name": "clearsilver",
+			'conditions':[
+				['OS=="win"',{
+						'variables':{
+							'platform_config_dir':[
+								'./<(csDir)/win',
+								'./<(csDir)/util/regex',
+							]
+						}
+					},{
+						'variables':{
+							'platform_config_dir':[
+								'<(unix_config_dir)'
+							]
+						},
+						'sources':[
+							'<(csDir)/util/ulocks.c',
+							'<(csDir)/util/rcfs.c',
+							'<(csDir)/util/skiplist.c',
+							'<(csDir)/util/dict.c',
+							'<(csDir)/util/dict.c',
+							'<(csDir)/util/neo_net.c',
+							'<(csDir)/util/neo_server.c',
+						],
+						'sources!':[
+							'<(csDir)/util/regex/regex.c'
+						],
+					}
+				]
+			],
+			'variables':{
+				'csDir':'clearsilver/src',
+				'unix_config_dir':'./<(csDir)/unix',
+				'qzExtDir':'./<(csDir)/qzFeedsExt',
+				'include_header_dirs':[
+					'<(csDir)',
+					'<(qzExtDir)'
+				],
+				'qzExtSource': [
+					'<(qzExtDir)/html_deal.c',
+					'<(qzExtDir)/uri_deal.c',
+					'<(qzExtDir)/json_deal.c',
+					'<(qzExtDir)/cs_secret.c',
+					'<(qzExtDir)/cs_sns_oi_tea.c',
+					'<(qzExtDir)/cs_oi_tea.c'
+				],
+			},
+			'include_dirs+': [
+				'<@(include_header_dirs)',
+				'<@(platform_config_dir)'
+			],
+			'direct_dependent_settings':{
+				'include_dirs':[
+					'<@(include_header_dirs)',
+					'<@(platform_config_dir)'
+				]
+			},
+			'sources':[
+				'<(csDir)/util/neo_err.c',
+				'<(csDir)/util/neo_files.c',
+				'<(csDir)/util/neo_misc.c',
+				'<(csDir)/util/neo_rand.c',
+				'<(csDir)/util/ulist.c',
+				'<(csDir)/util/neo_hdf.c',
+				'<(csDir)/util/neo_str.c',
+				'<(csDir)/util/neo_date.c',
+				'<(csDir)/util/wildmat.c',
+				'<(csDir)/util/neo_hash.c',
+				'<(csDir)/util/missing.c',
+				'<(csDir)/util/regex/regex.c',
+				#'<(csDir)/csparse.c',
+				'<@(qzExtSource)',
+				"src/clearsilver-wrap.cc",
+				"src/node-clearsilver.cc"
+			],
+		}
+  ]
+}
+
